@@ -38,51 +38,54 @@ IBM HR Employee Attrition/
 │
 └── Power BI/
     └── HR_Employee_Attrition_Dashboard.pbix
+```
 
-Key Findings
-Overall Attrition
-Total employees: 1,470
-Employees who left: 237
-Overall attrition rate: 16.12%
-Department
+## Key Findings
+### Overall Attrition
+- Total employees: 1,470
+- Employees who left: 237
+- Overall attrition rate: 16.12%
+
+### Department
 
 Sales has the highest attrition rate among the three departments, followed by Human Resources and Research & Development.
 
-Overtime
+### Overtime
 
 Employees working overtime have substantially higher attrition than employees who do not work overtime.
 
-Age Group
+### Age Group
 
 Employees aged 18–25 have the highest attrition rate, making them the highest-risk age group in the dataset.
 
-Job Satisfaction
+### Job Satisfaction
 
 Employees with lower job satisfaction show higher attrition rates than employees with higher satisfaction.
 
-Job Role
+### Job Role
 
 Sales Representatives have the highest attrition rate among the analyzed job roles.
 
-Business Recommendations
-Review workload and overtime policies to improve work-life balance.
-Investigate the causes of high turnover among Sales Representatives.
-Develop retention strategies for younger employees.
-Improve employee engagement and job satisfaction.
-Conduct department-level analysis to identify specific retention problems.
-Dashboard
+## Business Recommendations
+- Review workload and overtime policies to improve work-life balance.
+- Investigate the causes of high turnover among Sales Representatives.
+- Develop retention strategies for younger employees.
+- Improve employee engagement and job satisfaction.
+- Conduct department-level analysis to identify specific retention problems.
+
+## Dashboard
 
 The Power BI dashboard provides interactive analysis of employee attrition across:
 
-Department
-Overtime
-Age Group
-Job Satisfaction
-Job Role
+- Department
+- Overtime
+- Age Group
+- Job Satisfaction
+- Job Role
 
 Users can also filter the dashboard by department and gender.
 
-Conclusion
+## Conclusion
 
 The analysis indicates that employee attrition is associated with several workforce factors, particularly overtime, age, job role, department, and job satisfaction.
 
