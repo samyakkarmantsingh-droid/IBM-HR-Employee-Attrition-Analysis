@@ -215,38 +215,6 @@ GROUP BY Department
 ORDER BY Attrition_Rate DESC;
 
 
--- ==================================================
--- 6. Department Attrition Analysis
--- Business Question:
--- Which departments have the highest attrition,
--- and how do income and job satisfaction compare?
--- ==================================================
-
-SELECT
-    Department,
-    COUNT(*) AS Total_Employees,
-
-    SUM(
-        CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END
-    ) AS Employees_Left,
-
-    ROUND(
-        100.0 *
-        SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END)
-        / COUNT(*),
-        2
-    ) AS Attrition_Rate,
-
-    ROUND(AVG(MonthlyIncome), 0) AS Avg_Monthly_Income,
-
-    ROUND(AVG(JobSatisfaction), 2) AS Avg_Job_Satisfaction
-
-FROM employees
-
-GROUP BY Department
-
-ORDER BY Attrition_Rate DESC;
-
 
 -- ==================================================
 -- 7. Tenure-Based Attrition Analysis
@@ -280,3 +248,46 @@ FROM employees
 GROUP BY Tenure_Group
 
 ORDER BY Attrition_Rate DESC;
+
+
+-- ==================================================
+-- 8. Job Role Attrition Ranking
+-- Business Question:
+-- Which job roles have the highest attrition rates?
+-- ==================================================
+
+WITH role_attrition AS (
+
+    SELECT
+        JobRole,
+        COUNT(*) AS Total_Employees,
+
+        SUM(
+            CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END
+        ) AS Employees_Left,
+
+        ROUND(
+            100.0 *
+            SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END)
+            / COUNT(*),
+            2
+        ) AS Attrition_Rate
+
+    FROM employees
+
+    GROUP BY JobRole
+)
+
+SELECT
+    JobRole,
+    Total_Employees,
+    Employees_Left,
+    Attrition_Rate,
+
+    RANK() OVER (
+        ORDER BY Attrition_Rate DESC
+    ) AS Attrition_Rank
+
+FROM role_attrition
+
+ORDER BY Attrition_Rank;
