@@ -179,4 +179,104 @@ FROM (
     FROM employees
 ) AS segmented
 GROUP BY Risk_Segment
-ORDER BY Employees_Left DESC;
+ORDER BY Employees_Left DESC; 
+
+
+-- ==================================================
+-- 6. Department Attrition Analysis
+-- Business Question:
+-- Which departments have the highest attrition,
+-- and how do income and job satisfaction compare?
+-- ==================================================
+
+SELECT
+    Department,
+    COUNT(*) AS Total_Employees,
+
+    SUM(
+        CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END
+    ) AS Employees_Left,
+
+    ROUND(
+        100.0 *
+        SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END)
+        / COUNT(*),
+        2
+    ) AS Attrition_Rate,
+
+    ROUND(AVG(MonthlyIncome), 0) AS Avg_Monthly_Income,
+
+    ROUND(AVG(JobSatisfaction), 2) AS Avg_Job_Satisfaction
+
+FROM employees
+
+GROUP BY Department
+
+ORDER BY Attrition_Rate DESC;
+
+
+-- ==================================================
+-- 6. Department Attrition Analysis
+-- Business Question:
+-- Which departments have the highest attrition,
+-- and how do income and job satisfaction compare?
+-- ==================================================
+
+SELECT
+    Department,
+    COUNT(*) AS Total_Employees,
+
+    SUM(
+        CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END
+    ) AS Employees_Left,
+
+    ROUND(
+        100.0 *
+        SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END)
+        / COUNT(*),
+        2
+    ) AS Attrition_Rate,
+
+    ROUND(AVG(MonthlyIncome), 0) AS Avg_Monthly_Income,
+
+    ROUND(AVG(JobSatisfaction), 2) AS Avg_Job_Satisfaction
+
+FROM employees
+
+GROUP BY Department
+
+ORDER BY Attrition_Rate DESC;
+
+
+-- ==================================================
+-- 7. Tenure-Based Attrition Analysis
+-- Business Question:
+-- How does employee tenure relate to attrition?
+-- ==================================================
+
+SELECT
+    CASE
+        WHEN YearsAtCompany <= 2 THEN '0-2 Years'
+        WHEN YearsAtCompany <= 5 THEN '3-5 Years'
+        WHEN YearsAtCompany <= 10 THEN '6-10 Years'
+        ELSE '10+ Years'
+    END AS Tenure_Group,
+
+    COUNT(*) AS Total_Employees,
+
+    SUM(
+        CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END
+    ) AS Employees_Left,
+
+    ROUND(
+        100.0 *
+        SUM(CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END)
+        / COUNT(*),
+        2
+    ) AS Attrition_Rate
+
+FROM employees
+
+GROUP BY Tenure_Group
+
+ORDER BY Attrition_Rate DESC;
